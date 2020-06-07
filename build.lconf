@@ -1,0 +1,5 @@
+require"C"
+require"CXX"
+lconf_version"0.1"
+
+local lconf = project"lconf"
