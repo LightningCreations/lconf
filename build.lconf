@@ -1,5 +1,22 @@
-require"C"
-require"CXX"
 lconf_version"0.1"
 
-local lconf = project"lconf"
+local lconf_project = project"lconf"
+    :languages{require"CXX"};
+
+local lua = lconf_project:configure"lua"
+    :suppressInstall();
+local lua_modules = lconf_project:configure"lua-modules";
+
+
+lconf_project:configure{input = "Configure.h.lconf.in",
+    output = "Configure.h",
+    style="default",
+    replacements = {
+        module_dir = options.install_file"lib/lconf"
+    }};
+
+lconf_project:executable"lconf"
+    :compile{}
+    :link_libraries(lua:library"lua")
+
+return lconf_project;

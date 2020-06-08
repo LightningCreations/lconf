@@ -1,0 +1,15 @@
+#ifndef LCONF_CONFIGURE_H_20202_06_07_17_09_41
+#define LCONF_CONFIGURE_H_20202_06_07_17_09_41
+
+$Eval{
+    local default = options.with"default-generator":quoted():get();
+    if not default then
+        return "/*#undef LCONF_DEFAULT_GENERATOR*/"
+    else
+        return "#define LCONF_DEFAULT_GENERATOR "..default;
+    endif
+}
+
+#define LCONF_MODULE_DIR ${module_dir}
+
+#endif
