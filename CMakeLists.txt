@@ -29,7 +29,7 @@ message(STATUS "Building lconf bootstrapped: ${LCONF_BUILD_BOOTSTRAP}")
 if(LCONF_BUILD_BOOTSTRAP)
     file(MAKE_DIRECTORY stage2)
     add_custom_target(lconf
-        DEPENDS lcconf-stage1
+        DEPENDS lconf-stage1
         COMMAND $<TARGET_FILE:lconf-stage1> configure --generator=${LCONF_DEFAULT_GENERATOR}
         --module-path="${CMAKE_CURRENT_SOURCE_DIR}/modules/?.lua" ${CMAKE_CURRENT_SOURCE_DIR}
         COMMAND $<TARGET_FILE:lconf-stage1> build ${CMAKE_CURRENT_BINARY_DIR}/stage2
