@@ -24,8 +24,8 @@ void load_lua_libs(lua_State* state,int argc,char** argv);
 
 const char HELP[] = "Usage: %s <configure|build|install>\n"
                     "configure [options] <src-dir>\n"
-                    "build [options] <bin-dir> "
-                    "install [options] <bin-dir>";
+                    "build [options] <bin-dir>\n"
+                    "install [options] <bin-dir>\n";
 
 int main(int argc, char** argv){
     if(argc<3){

@@ -17,5 +17,8 @@ struct Options* loadoptions(int argc,char** argv){
     struct Options* ret = malloc(sizeof(struct Options));
     ret->with = map_new(NULL,strless,NULL,NULL);
     ret->enable = map_new(NULL,strless,NULL,NULL);
+    
 
+
+    return ret;
 }
