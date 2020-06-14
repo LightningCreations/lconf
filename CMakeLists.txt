@@ -15,12 +15,14 @@ configure_file("Configure.h.cmake.in" "Configure.h" ESCAPE_QUOTES)
 
 add_subdirectory(lua)
 
+add_subdirectory(C-Programming-Utilities/collect)
+
 include_directories(lua)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(lconf-stage1 src/main.c src/Options.h)
+add_executable(lconf-stage1 src/main.c src/Options.h src/Options.c)
 set_target_properties(lconf-stage1 PROPERTIES OUTPUT_NAME "lconf")
-target_link_libraries(lconf-stage1 lua-static)
+target_link_libraries(lconf-stage1 lua-static collect)
 
 option(LCONF_BUILD_BOOTSTRAP "Configures whether or not lconf will build itself" ON)
 
@@ -28,7 +30,7 @@ message(STATUS "Building lconf bootstrapped: ${LCONF_BUILD_BOOTSTRAP}")
 
 if(LCONF_BUILD_BOOTSTRAP)
     file(MAKE_DIRECTORY stage2)
-    add_custom_target(lconf
+    add_custom_target(lconf-stage2
         DEPENDS lconf-stage1
         COMMAND $<TARGET_FILE:lconf-stage1> configure --generator=${LCONF_DEFAULT_GENERATOR}
         --module-path="${CMAKE_CURRENT_SOURCE_DIR}/modules/?.lua" ${CMAKE_CURRENT_SOURCE_DIR}

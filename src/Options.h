@@ -6,8 +6,23 @@
 #define LCONF_OPTIONS_H
 
 #include <lstate.h>
+#include <Map.h>
 
-void loadoptions(lua_State* into,int argc,char** argv);
+struct Options{
+    const char* prefix;
+    const char* target;
+    const char* module_path;
+    const char* generator;
+    const char* srcdir;
+    TreeMap* with;
+    TreeMap* enable;
+};
+
+struct Options* loadoptions(int argc,char** argv);
+
+void freeoptions(struct Options*);
+
+void load_optlib(lua_State* L,struct Options*);
 
 int opt_enable(lua_State* L);
 int opt_with(lua_State* L);

@@ -12,4 +12,6 @@ $Eval{
 
 #define LCONF_MODULE_DIR ${module_dir}
 
+#define LCONF_DEFAULT_PREFIX ${prefix}
+
 #endif

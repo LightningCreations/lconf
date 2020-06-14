@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <lualib.h>
 #include <lauxlib.h>
+#include "Options.h"
+#include <string.h>
 
 void* alloc(void *ud, void *mem, size_t osz, size_t nsz){
     if(mem) {
@@ -20,15 +22,22 @@ void* alloc(void *ud, void *mem, size_t osz, size_t nsz){
 
 void load_lua_libs(lua_State* state,int argc,char** argv);
 
-const char HELP[] = "Usage: %s <configure|build>\n"
-                    "%1$s configure [options] <src-dir>\n"
-                    "%1$s build [options] <bin-dir> ";
+const char HELP[] = "Usage: %s <configure|build|install>\n"
+                    "configure [options] <src-dir>\n"
+                    "build [options] <bin-dir> "
+                    "install [options] <bin-dir>";
 
 int main(int argc, char** argv){
-    if(argc<2){
+    if(argc<3){
         printf(HELP,argv[0]);
+        return 1;
+    }else if(strcmp(argv[1],"configure")==0){
+        struct Options* opts = loadoptions(argc-2,argv+2);
     }
-    lua_State* state = lua_newstate(alloc,NULL);
-    load_lua_libs(state,argc,argv);
+
+
+}
+
+void load_lua_libs(lua_State* state,int argc,char** argv){
 
 }
