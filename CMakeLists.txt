@@ -29,8 +29,8 @@ option(LCONF_BUILD_BOOTSTRAP "Configures whether or not lconf will build itself"
 message(STATUS "Building lconf bootstrapped: ${LCONF_BUILD_BOOTSTRAP}")
 
 if(LCONF_BUILD_BOOTSTRAP)
-    file(MAKE_DIRECTORY stage2)
-    add_custom_target(lconf-stage2
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/stage2)
+    add_custom_target(lconf-stage2 ALL
         DEPENDS lconf-stage1
         COMMAND $<TARGET_FILE:lconf-stage1> configure --generator=${LCONF_DEFAULT_GENERATOR}
         --module-path="${CMAKE_CURRENT_SOURCE_DIR}/modules/?.lua" ${CMAKE_CURRENT_SOURCE_DIR}
