@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/C-Programming-Utilities" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lua" vcs="Git" />
   </component>
 </project>

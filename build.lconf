@@ -12,7 +12,7 @@ lconf_project:configure{input = "Configure.h.lconf.in",
     output = "Configure.h",
     style="default",
     replacements = {
-        module_dir = options.install_file"lib/lconf"
+        module_path = options.with"default-module-path" or options.install_path{"lib/lconf/?.lua","lib/lconf/?/init.lua"}
     }};
 
 lconf_project:executable"lconf"

@@ -10,7 +10,7 @@ $Eval{
     endif
 }
 
-#define LCONF_MODULE_DIR ${module_dir}
+#define LCONF_MODULE_PATH ${module_path}
 
 #define LCONF_DEFAULT_PREFIX ${prefix}
 

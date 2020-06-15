@@ -14,6 +14,7 @@ struct Options{
     const char* module_path;
     const char* generator;
     const char* srcdir;
+    const char* builddir;
     TreeMap* with;
     TreeMap* enable;
 };
