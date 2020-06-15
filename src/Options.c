@@ -29,7 +29,11 @@ struct Options* loadoptions(int argc,char** argv){
             arg++;
             char* begin = strtok(arg,"=");
             if(strcmp(begin,"prefix")==0){
-                ret->prefix =
+                ret->prefix = strtok(NULL,"");
+		if(!ret->prefix){
+                    print_help();
+		    exit(1);
+		}
             }
         }
     }
