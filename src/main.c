@@ -10,13 +10,13 @@
 #include <string.h>
 #include <Configure.h>
 
-void* alloc(void *ud, void *mem, size_t osz, size_t nsz){
+void* alloc(void *ud, void *mem, size_t osz, size_t nsz) {
     if(mem) {
-        if(nsz==0){
-            free (mem);
+        if(nsz==0) {
+            free(mem);
             return NULL;
-        }else
-            return realloc(mem,nsz);
+        } else
+            return realloc(mem, nsz);
     } else
         return malloc(nsz);
 }
@@ -44,22 +44,22 @@ const char HELP[] = "Usage: %s <configure|build|install>\n"
                     "\tinstall [options] [bin-dir] [-- [build tool options]]\n"
                     "\t\t--install=<targets...>: Installs only the named targets.";
 
-void print_help(){
+void print_help() {
 
 }
 
-int main(int argc, char** argv){
-    if(argc<2){
+int main(int argc, char **argv) {
+    if(argc < 2) {
 
         return 1;
-    }else if(strcmp(argv[1],"configure")==0){
-        struct Options* opts = loadoptions(argc-2,argv+2);
+    } else if(strcmp(argv[1], "configure") == 0) {
+        struct Options* opts = loadoptions(argc-2, argv+2);
 
     }
 
 
 }
 
-void load_lua_libs(lua_State* state,int argc,char** argv){
+void load_lua_libs(lua_State* state, int argc, char **argv) {
 
 }
