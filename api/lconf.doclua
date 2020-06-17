@@ -1,0 +1,10 @@
+
+---
+--@module lconf Primary Module for lconf
+--
+--
+--
+--
+--
+
+return nil -- Satisfy lmeta, which requires a non-comment statement to parse the source file.

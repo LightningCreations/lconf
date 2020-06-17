@@ -25,7 +25,11 @@ add_subdirectory(C-Programming-Utilities/collect)
 include_directories(lua)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(lconf-stage1 src/main.c src/Options.h src/Options.c)
+if(NOT WIN32)
+    set(LCONF_STAGE1_FILES src/PosixProcess.c)
+endif()
+
+add_executable(lconf-stage1 src/main.c src/Options.h src/Options.c src/LuaApi.h ${LCONF_STAGE1_FILES})
 set_target_properties(lconf-stage1 PROPERTIES OUTPUT_NAME "lconf")
 target_link_libraries(lconf-stage1 lua-static collect)
 

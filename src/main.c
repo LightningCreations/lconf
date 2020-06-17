@@ -21,11 +21,11 @@ void* alloc(void *ud, void *mem, size_t osz, size_t nsz) {
         return malloc(nsz);
 }
 
-void load_lua_libs(lua_State* state,int argc,char** argv);
+void load_lua_libs(lua_State* state);
 
 const char HELP[] = "Usage: %s <configure|build|install>\n"
                     "\tconfigure [options] <src-or-build-dir>\n"
-                    "\t\tOptions:\n\n"
+                    "\t\tOptions:\n"
                     "\t\t--prefix=<path>: Sets the root of the installation tree to <path>. Defaults to " LCONF_DEFAULT_PREFIX "\n"
                     "\t\t--module-path=<path>: Sets the lua search path for lconf modules. Defaults to " LCONF_MODULE_PATH "\n"
                     "\t\t--generator=<generator>: Sets the generator to use for the build. Defaults to " LCONF_DEFAULT_GENERATOR "\n"
@@ -36,30 +36,40 @@ const char HELP[] = "Usage: %s <configure|build|install>\n"
                     "\t\t--enable-<option>: Sets the boolean <option> to on\n"
                     "\t\t--disable-<option>: Sets the boolean <option> to on\n"
                     "\tbuild [options] [bin-dir] [-- [build tool options]]\n"
+                    "\t\tOptions:\n"
                     "\t\t--build=<targets...>: Builds only the named targets (except that if any target is named all, all targets are built), separated by semicolons. In a multiproject build <project>/<target> selects <target> built by <project>\n"
                     "\t\t--jobs=<jobs>: In buildsystems that support multiple jobs, sets the number of jobs to use to build the project\n"
                     "\t\t--status|--no-status: Enables or disables status indicators on generators that support them (Default on for such targets)\n"
                     "\t\t--reconfigure: Forces lconf to rerun the configuration, even if it is not out-of-date.\n"
                     "\t\t--no-reconfigure: Prevents lconf from rerunning the configuration, even if it is out of date.\n"
                     "\tinstall [options] [bin-dir] [-- [build tool options]]\n"
+                    "\t\tOptions:\n"
                     "\t\t--install=<targets...>: Installs only the named targets.";
 
-void print_help() {
+static const char* prg_name;
 
+void print_help() {
+    printf(HELP,prg_name);
 }
 
-int main(int argc, char **argv) {
-    if(argc < 2) {
 
+int main(int argc, char **argv) {
+    prg_name = argv[0];
+    if(argc < 2) {
+        print_help();
         return 1;
     } else if(strcmp(argv[1], "configure") == 0) {
         struct Options* opts = loadoptions(argc-2, argv+2);
-
+        lua_State* L = lua_newstate(alloc,NULL);
+        load_optlib(L,opts);
+    } else {
+        print_help();
+        return 1;
     }
 
 
 }
 
-void load_lua_libs(lua_State* state, int argc, char **argv) {
+void load_lua_libs(lua_State* state) {
 
 }

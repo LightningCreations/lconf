@@ -6,7 +6,6 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-function writeTarget() end
 
 function buildTarget(name,builddir)
     lconf.run_command{
