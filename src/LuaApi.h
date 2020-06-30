@@ -10,7 +10,7 @@
 
 void lua_loadlconf(lua_State *L);
 
-void lconf_findprogram(lua_State *L);
-void lconf_executeprocess(lua_State *L);
+int lconf_findprogram(lua_State *L);
+int lconf_executeprocess(lua_State *L);
 
 #endif //LCONF_LUAAPI_H
