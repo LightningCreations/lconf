@@ -1,0 +1,7 @@
+lconf.version"0.1"
+
+local ctest = lconf.project"ctest"
+    :languages{require"C"};
+
+ctest:add_executable"ctest"
+

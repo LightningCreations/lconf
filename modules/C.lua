@@ -6,17 +6,19 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local c_standards = {"89", "95","99","11","18",["23"]={"2x","23"}};
+local c_standards = {"89", "95","99","11","18",["2x"]={"2x","23"}};
+
+local lang = {};
 
 -- Find the C Compiler
 -- For now, assume the C Compiler accepts gnu style options
-function findcc()
+function lang.findCompiler()
     if toolchains.default:haveCompiler"C" then
        return toolchains.default:getCompiler"C"
     end
-    local found,CC = findProgram{os.getenv"CC"}
+    local found,CC = lconf.find_program{os.getenv"CC"}
     if not found then
-        found,CC = findProgram{"cc", "gcc", "clang"}
+        found,CC = lconf.find_program{"cc", "gcc", "clang"}
         if not found then
             return error"Could not find C Compiler for the system, make sure cc is on the PATH or specify it explicitly with CC=<c compiler name>"
         end
@@ -46,6 +48,8 @@ function findcc()
        end
     end
 end
+
+function testCompilerRun() end
 
 function writeCompileRule(generator,compiler,opts)
     local compilecmd = {compiler:cmd()};

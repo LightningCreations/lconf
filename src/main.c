@@ -23,7 +23,7 @@ void* alloc(void *ud, void *mem, size_t osz, size_t nsz) {
 
 void load_lua_libs(lua_State* state);
 
-const char HELP[] = "Usage: %s <configure|build|install>\n"
+const char HELP[] = "Usage: %s <configure|test|build|install>\n"
                     "\tconfigure [options] <src-or-build-dir>\n"
                     "\t\tOptions:\n"
                     "\t\t--prefix=<path>: Sets the root of the installation tree to <path>. Defaults to " LCONF_DEFAULT_PREFIX "\n"
@@ -44,7 +44,8 @@ const char HELP[] = "Usage: %s <configure|build|install>\n"
                     "\t\t--no-reconfigure: Prevents lconf from rerunning the configuration, even if it is out of date.\n"
                     "\tinstall [options] [bin-dir] [-- [build tool options]]\n"
                     "\t\tOptions:\n"
-                    "\t\t--install=<targets...>: Installs only the named targets.";
+                    "\t\t--install=<targets...>: Installs only the named targets."
+                    "\ttest [options] [bin-dir] ";
 
 static const char* prg_name;
 

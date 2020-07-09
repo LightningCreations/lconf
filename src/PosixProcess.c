@@ -59,3 +59,7 @@ int lconf_findprogram(lua_State *L){
         return find_program(L,prg);
     }
 }
+
+int lconf_executeprocess(lua_State *L){
+
+}

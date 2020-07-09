@@ -1,22 +1,26 @@
-lconf_version"0.1"
+lconf.version"0.1"
 
-local lconf_project = project"lconf"
+local lconf_project = lconf.project"lconf"
     :languages{require"CXX"};
 
 local lua = lconf_project:configure"lua"
     :suppressInstall();
-local lua_modules = lconf_project:configure"lua-modules";
 
 
-lconf_project:configure{input = "Configure.h.lconf.in",
+local configured =lconf_project:configure_file{input = "Configure.h.lconf.in",
     output = "Configure.h",
     style="default",
     replacements = {
-        module_path = options.with"default-module-path" or options.install_path{"lib/lconf/?.lua","lib/lconf/?/init.lua"}
+        module_path = options.with"default-module-path":get() or options.install_path{"lib/lconf/?.lua","lib/lconf/?/init.lua"},
+        module_path = options.with"default-prefix":get() or options.prefix
     }};
 
-lconf_project:executable"lconf"
-    :compile{}
+if lconf.is_posix() then
+   local proc_file = "src/PosixProcess.c"
+end
+
+lconf_project:add_executable"lconf"
+    :compile{"src/LuaApi.h","src/main.c","src/Options.c","src/Options.h",configured,}
     :link_libraries(lua:library"lua")
 
 return lconf_project;
