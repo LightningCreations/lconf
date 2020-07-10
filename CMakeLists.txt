@@ -35,7 +35,7 @@ add_executable(lconf-stage1 src/main.c src/Options.h src/Options.c src/LuaApi.h 
 set_target_properties(lconf-stage1 PROPERTIES OUTPUT_NAME "lconf")
 target_link_libraries(lconf-stage1 lua-static collect)
 
-option(LCONF_BUILD_BOOTSTRAP "Configures whether or not lconf will build itself" ON)
+option(LCONF_BUILD_BOOTSTRAP "Configures whether or not lconf will build itself" OFF) # Off until lconf is finished
 
 message(STATUS "Building lconf bootstrapped: ${LCONF_BUILD_BOOTSTRAP}")
 
